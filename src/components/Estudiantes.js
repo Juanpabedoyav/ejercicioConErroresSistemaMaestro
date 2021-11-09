@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { Component } from 'react'
-import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody, ModalFooter } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 const url = "https://maestrogeekapp.herokuapp.com/data/";
@@ -13,13 +13,13 @@ export default class Estudiantes extends Component {
     constructor(props){
         super(props);
         this.state = {
-            data: []
-            modalEliminar: false,
+            data: [],
+            modalEliminar: false
         }
     }
 
     componentDidMount(){
-        //this.peticionGet();
+        this.peticionGet();
     }
 
    
@@ -37,7 +37,7 @@ export default class Estudiantes extends Component {
     peticionGet=()=>{
         axios.get(url)
         .then(response => {
-            this.setState({data response.data})
+            this.setState({data: response.data})
         })
         .catch(error => {
             console.log(error.message);
@@ -47,7 +47,7 @@ export default class Estudiantes extends Component {
     
    
    
-    peticionDelete =  () => {
+    peticionDelete =  async () => {
         await axios.delete(url+this.state.form.id)
         .then(response => {
             this.setState({modalEliminar:false});
@@ -56,8 +56,7 @@ export default class Estudiantes extends Component {
             console.log(error.message);
         })
     }
-
-    {
+    render(){
         return (
             <div className="container">
 
