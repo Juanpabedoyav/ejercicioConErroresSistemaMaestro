@@ -20,6 +20,7 @@ export default class Estudiantes extends Component {
 
     componentDidMount(){
         this.peticionGet();
+        this.peticionDelete();
     }
 
    
